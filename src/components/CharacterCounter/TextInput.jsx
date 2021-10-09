@@ -1,8 +1,7 @@
-import { useRecoilState } from "recoil";
-import { textState } from "../../recoil/characterCounter/atoms";
+import { useCharacterCounterStore } from "../../store/characterCounter/characterCounterStore";
 
 export function TextInput() {
-  const [text, setText] = useRecoilState(textState);
+  const { inputText, setText } = useCharacterCounterStore();
 
   const onChange = (event) => {
     setText(event.target.value);
@@ -10,9 +9,9 @@ export function TextInput() {
 
   return (
     <div>
-      <input type="text" value={text} onChange={onChange} />
+      <input type="text" value={inputText} onChange={onChange} />
       <br />
-      Echo: {text}
+      Echo: {inputText}
     </div>
   );
 }

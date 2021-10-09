@@ -1,20 +1,16 @@
 import { useState } from "react";
-import { useSetRecoilState } from "recoil";
-import { todoListState } from "../../recoil/toDo/atoms";
+import { useToDoStore } from "../../store/toDo/toDoStore";
 
 export function TodoItemCreator() {
   const [inputValue, setInputValue] = useState("");
-  const setTodoList = useSetRecoilState(todoListState);
+  const { addItem } = useToDoStore();
 
-  const addItem = () => {
-    setTodoList((oldTodoList) => [
-      ...oldTodoList,
-      {
-        id: getId(),
-        text: inputValue,
-        isComplete: false,
-      },
-    ]);
+  const addItemOnList = () => {
+    addItem({
+      id: getId(),
+      text: inputValue,
+      isComplete: false,
+    });
     setInputValue("");
   };
 
@@ -25,7 +21,7 @@ export function TodoItemCreator() {
   return (
     <div>
       <input type="text" value={inputValue} onChange={onChange} />
-      <button className="spacing" onClick={addItem}>
+      <button className="spacing" onClick={addItemOnList}>
         Add
       </button>
     </div>

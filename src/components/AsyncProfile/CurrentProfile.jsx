@@ -1,9 +1,12 @@
-import { useRecoilValue } from "recoil";
-import { currentProfileQuery } from "../../recoil/asyncProfile/selectors";
+import { useEffect } from "react";
+import { useAsyncProfileStore } from "../../store/asyncProfile/asyncProfileStore";
 
 export const CurrentProfile = () => {
-  const { name, email, picture, location } =
-    useRecoilValue(currentProfileQuery);
+  const { profile } = useAsyncProfileStore();
+
+  if (!profile) return null;
+  const { name, location, picture, email } = profile;
+
   return (
     <div className="flex-column">
       <img className="profile-picture" src={picture.large} alt="Profile" />

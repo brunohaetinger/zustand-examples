@@ -1,32 +1,31 @@
-import { useRecoilState } from "recoil";
-import { todoListState } from "../../recoil/toDo/atoms";
+import { useToDoStore } from "../../store/toDo/toDoStore";
 
 export function TodoItem({ item }) {
-  const [todoList, setTodoList] = useRecoilState(todoListState);
-  const index = todoList.findIndex((listItem) => listItem === item);
+  const { list, setList } = useToDoStore();
+  const index = list.findIndex((listItem) => listItem === item);
 
   const editItemText = ({ target: { value } }) => {
-    const newList = replaceItemAtIndex(todoList, index, {
+    const newList = replaceItemAtIndex(list, index, {
       ...item,
       text: value,
     });
 
-    setTodoList(newList);
+    setList(newList);
   };
 
   const toggleItemCompletion = () => {
-    const newList = replaceItemAtIndex(todoList, index, {
+    const newList = replaceItemAtIndex(list, index, {
       ...item,
       isComplete: !item.isComplete,
     });
 
-    setTodoList(newList);
+    setList(newList);
   };
 
   const deleteItem = () => {
-    const newList = removeItemAtIndex(todoList, index);
+    const newList = removeItemAtIndex(list, index);
 
-    setTodoList(newList);
+    setList(newList);
   };
 
   return (

@@ -1,9 +1,8 @@
-import { useRecoilValue } from "recoil";
-import { todoListStatsState } from "../../recoil/toDo/selectors";
+import { useToDoStore } from "../../store/toDo/toDoStore";
 
 export function TodoListStats() {
   const { totalNum, totalCompletedNum, totalUncompletedNum, percentCompleted } =
-    useRecoilValue(todoListStatsState);
+    useToDoStore((state) => state.getStats());
 
   const formattedPercentCompleted = Math.round(percentCompleted);
 

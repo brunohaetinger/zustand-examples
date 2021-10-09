@@ -1,6 +1,6 @@
-# RecoilJS Examples
+# Zustand Examples
 
-This repo has some examples of RecoilJS uses.
+This repo has some examples of Zustand uses.
 
 ## Use
 
